@@ -1,14 +1,12 @@
-const fetchPet = async (queryKey) => {
-
+const fetchPet = async ({ queryKey }) => {
   const id = queryKey[1];
+  const apiRes = await fetch(`http://pets-v2.dev-apis.com/pets?id=${id}`);
 
-  const res = await fetch(`http://pets-v2.dev-apis.com/pets?id=${id}`);
-
-  if (!res.ok) {
-    throw new Error('details/${id} not found');
+  if (!apiRes.ok) {
+    throw new Error(`details/${id} fetch not ok`);
   }
 
-  return res.json();
-}
+  return apiRes.json();
+};
 
 export default fetchPet;
